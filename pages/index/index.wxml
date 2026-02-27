@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="card">
+    <view class="title">定位 / 搜索</view>
+    <view class="field">
+      <view class="label">城市或地点</view>
+      <input class="input" value="{{address}}" placeholder="例如：上海 外滩" bindinput="onAddressInput" />
+    </view>
+    <view class="flex-row">
+      <button class="secondary-btn button" bindtap="onLocate">使用当前位置</button>
+      <button class="primary-btn button" bindtap="onSearch">搜索定位</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">地图范围与尺寸</view>
+    <view class="field">
+      <view class="label">缩放级别：{{scale}}</view>
+      <slider min="5" max="18" step="1" value="{{scale}}" bindchange="onScaleChange" />
+    </view>
+    <view class="field">
+      <view class="label">画布宽度：{{posterWidth}}px</view>
+      <slider min="600" max="2000" step="50" value="{{posterWidth}}" bindchange="onWidthChange" />
+    </view>
+    <view class="field">
+      <view class="label">画布高度：{{posterHeight}}px</view>
+      <slider min="600" max="2000" step="50" value="{{posterHeight}}" bindchange="onHeightChange" />
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">线条图风格</view>
+    <picker range="{{styles}}" range-key="label" value="{{styleIndex}}" bindchange="onStyleChange">
+      <view class="input">{{styles[styleIndex].label}}</view>
+    </picker>
+    <view class="map-info">风格会影响底图颜色、线条粗细与背景色（由 maptoposter 服务渲染）。</view>
+  </view>
+
+  <view class="card">
+    <view class="title">地图预览</view>
+    <view class="map-wrap">
+      <map
+        longitude="{{longitude}}"
+        latitude="{{latitude}}"
+        scale="{{scale}}"
+        show-location
+        markers="{{markers}}"
+        style="width: 100%; height: 420rpx;"
+      />
+    </view>
+    <view class="map-info">中心坐标：{{latitude}}, {{longitude}}</view>
+  </view>
+
+  <view class="card">
+    <view class="title">生成高清线条图</view>
+    <button class="primary-btn" bindtap="onGenerate" loading="{{loading}}">生成线条海报</button>
+    <view wx:if="{{posterUrl}}" style="margin-top: 16rpx;">
+      <image class="poster-preview" mode="widthFix" src="{{posterUrl}}" />
+      <button class="secondary-btn" style="margin-top: 12rpx;" bindtap="onPreview">预览大图</button>
+    </view>
+    <view wx:if="{{errorMessage}}" class="map-info" style="color: #ff6b6b;">{{errorMessage}}</view>
+  </view>
+</view>
