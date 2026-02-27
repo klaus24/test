@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "线条地图生成器",
+    "navigationBarBackgroundColor": "#1f1f1f",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light"
+  }
+}
